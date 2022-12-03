@@ -1,9 +1,10 @@
-html,
-body {
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+* {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Open Sans", sans-serif;
+  box-sizing: border-box;
 }
 
 a {
@@ -11,16 +12,23 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+input:focus {
+  outline: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@keyframes MoveUpDown {
+  0%,
+  100% {
+    top: 0;
   }
-  body {
-    color: white;
-    background: black;
+  50% {
+    top: 100px;
   }
+}
+
+#eth-symbol-hero {
+  position: absolute;
+  top: 0;
+  right: 0;
+  animation: MoveUpDown 4s linear infinite;
 }
