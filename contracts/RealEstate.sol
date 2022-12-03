@@ -16,7 +16,7 @@ contract RealEstate is ERC1155, Ownable {
     Counters.Counter private tokenId;
     Counters.Counter private offerId;
 
-    function currTokenId() private view returns(uint256) {
+    function currTokenId() public view returns(uint256) {
         return tokenId.current();
     }
 
@@ -28,7 +28,7 @@ contract RealEstate is ERC1155, Ownable {
         tokenId.decrement();
     }
 
-    function currOfferId() private view returns(uint256) {
+    function currOfferId() public view returns(uint256) {
         return offerId.current();
     }
 

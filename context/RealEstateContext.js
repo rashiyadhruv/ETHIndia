@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 const { ethers } = require("ethers");
+const {
+  RealEstateAddress,
+  RealEstateAddressABI,
+  key,
+  collectionId,
+} = require("./constants");
 const { Web3Modal } = require("web3modal");
+const { Revise } = require("revise-sdk");
+const revise = new Revise({ auth: key });
+
 // import Web3Modal from "web3modal";
 // import { ethers } from "ethers";
-
-const { RealEstateAddress, RealEstateAddressABI } = require("./constants");
 
 export const TransactionContext = React.createContext();
 
@@ -61,22 +68,34 @@ export const TransactionProvider = ({ children }) => {
     return transactionContract;
   };
 
-  const generateToken = async (divisions, price, landdetails) => {
+  const generateToken = async (divisions, price, landdetails, type) => {
     console.log("Generating token...");
-    
+
     const contract = await getEthereumContract();
 
     let index = await contract.currTokenId();
+    console.log("index", 22 + index.toNumber());
+    let ind = 22 + index.toNumber();
+    let indfinal = ind.toString();
+    console.log("indfinal", indfinal);
+
+    // type is used for the token type
 
     const res = await revise.addNFT(
       {
-        name: "qwqwqw33",
-        tokenId: index + 5,
+        name: "qwqwqw55",
+        tokenId: indfinal,
         description:
-          "This is not just a mere NFT but is The Earth itself and it has emotions !!! Voila !!! , It will feel sad when the emissions in the linked location increase in comparison to yesterday and happy when less compared to yesterday. Try to keep it happy ALWAYS",
+          "This is a token for the property with the following details: " +" "+ landdetails,
         image: "https://i.ibb.co/4dXWQhC/Frame-57.gif",
       },
-      [{ condition: "Neutral" }, { location: "Gandhinagar" }],
+      [
+        { area: "1100" },
+        { location: "Gandhinagar" },
+        { type: type },
+        { price: price },
+        { divisions: divisions },
+      ],
       collectionId
     );
 
@@ -86,9 +105,15 @@ export const TransactionProvider = ({ children }) => {
       divisions,
       price,
       landdetails,
-      res.id
+      res.id,
+      {
+        gasLimit: 5000000,
+      }
     );
     await tokencreated.wait();
+    console.log("Token created", tokencreated);
+    let index2 = await contract.currTokenId();
+    console.log("index2", 22 + index2.toNumber());
   };
 
   const createSale = async (url, formInputPrice, isReselling, id) => {
