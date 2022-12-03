@@ -32,3 +32,9 @@ input:focus {
   right: 0;
   animation: MoveUpDown 4s linear infinite;
 }
+
+.page-container {
+  height: 100vh;
+  background: linear-gradient(285.57deg, #121a24 0%, #222e3c 100%);
+  padding: 2% 5%;
+}
