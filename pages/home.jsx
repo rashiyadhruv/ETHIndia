@@ -1,7 +1,13 @@
+import { useState } from "react";
 import Assets from "../components/Assets";
+import TokenPage from "../components/TokenPage";
 import { Box, Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 const Home = () => {
+  const [activeTokenPage, setActiveTokenPage] = useState({
+    id: null,
+    type: null,
+  });
   return (
     <Box className="page-container">
       <Tabs>
@@ -36,13 +42,20 @@ const Home = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Assets />
+            {activeTokenPage.id === null ? (
+              <Assets setActiveTokenPage={setActiveTokenPage} />
+            ) : (
+              <TokenPage
+                tokenId={activeTokenPage.id}
+                type={activeTokenPage.type}
+              />
+            )}
           </TabPanel>
           <TabPanel>
-            <p>two!</p>
+            <p>Offers</p>
           </TabPanel>
           <TabPanel>
-            <p>three!</p>
+            <p>Explore</p>
           </TabPanel>
         </TabPanels>
       </Tabs>

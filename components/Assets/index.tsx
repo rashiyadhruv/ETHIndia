@@ -3,7 +3,7 @@ import { BiAddToQueue } from "react-icons/bi";
 
 import Asset from "./Asset";
 
-const Assets = () => {
+const Assets = ({ setActiveTokenPage }) => {
   return (
     <Flex>
       {/* map out the assets */}
@@ -14,6 +14,7 @@ const Assets = () => {
         area="2350"
         price="90 lacs"
         renovations="1 (2017)"
+        setActiveTokenPage={setActiveTokenPage}
       />
       {/* add token button */}
       <VStack marginLeft="40px" height="80vh" justify="center">

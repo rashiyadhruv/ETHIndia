@@ -11,15 +11,6 @@ import {
 } from "@chakra-ui/react";
 import { Stack, HStack, VStack } from "@chakra-ui/react";
 
-type AssetProps = {
-  tokenId: string;
-  location: string;
-  landmarks: string;
-  area: string;
-  price: string;
-  renovations: string;
-};
-
 const Asset = ({
   tokenId,
   location,
@@ -27,7 +18,8 @@ const Asset = ({
   area,
   price,
   renovations,
-}: AssetProps) => {
+  setActiveTokenPage,
+}) => {
   return (
     <VStack
       backgroundColor="#1C3139"
@@ -91,10 +83,23 @@ const Asset = ({
       </HStack>
 
       <HStack width="100%" spacing={1} justify="space-between">
-        <Button colorScheme="teal" width="47%" padding="5px 10px">
+        <Button
+          colorScheme="teal"
+          width="47%"
+          padding="5px 10px"
+          onClick={() => {
+            setActiveTokenPage({ id: tokenId, type: "sell" });
+          }}
+        >
           Sell Property
         </Button>
-        <Button width="47%" padding="5px 10px">
+        <Button
+          width="47%"
+          padding="5px 10px"
+          onClick={() => {
+            setActiveTokenPage({ id: tokenId, type: "rent" });
+          }}
+        >
           Rent Property
         </Button>
       </HStack>
